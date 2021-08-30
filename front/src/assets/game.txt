@@ -1,0 +1,248 @@
+ТАБЛИЦЫ БД
+
+*** players ***
+player_id varchar(32) NOT NULL PK
+player_name varchar(32) NOT NULL
+player_group numeric NOT NULL
+
+*** leads ***
+lead_id varchar(32) NOT NULL PK
+from_player_id varchar(32) NOT NULL
+to_player_id varchar(32) NOT NULL
+salary numeric NOT NULL
+profit numeric NOT NULL
+amount: numeric NOT NULL
+is_confirmed boolean NOT NULL
+
+
+1) создание игрока
+POST /create-player
+
+//request
+{  
+  playerName: 'Иван',
+  playerGroup: 1
+}
+//response
+{
+  playerId: 'd4146bea-95d5-414a-a01c-755dba3a4e97'  
+}
+
+2) получение списка игроков
+//GET /get-players
+
+[
+  {
+    playerId: 'd4146bea-95d5-414a-a01c-755dba3a4e97',
+    playerName: 'Иван',
+    playerGroup: 1    
+  }
+]
+
+3) создание лида
+POST /create-lead
+//request
+{
+  fromPlayerId: 'd4146bea-95d5-414a-a01c-755dba3a4e97',
+  toPlayerId: 'e3965142-9b54-491a-9db7-f22364f266b3',  
+  salary: 35700,
+  amount: 702500,
+  isConfirmed: false,
+  profit: -750123,
+}
+
+//response
+{
+  leadId: '35459969-6308-46e6-950c-b981c78f541a',  
+}
+
+4) получение списка лидов, кому НЕ подтвердили кредит (select * from leads where isConfirmed = false) 
+GET /get-not-confirmed-leads?playerId=e3965142-9b54-491a-9db7-f22364f266b3
+
+[
+  {
+    fromPlayerId: 'd4146bea-95d5-414a-a01c-755dba3a4e97',
+    toPlayerId: 'e3965142-9b54-491a-9db7-f22364f266b3',
+    leadId: '35459969-6308-46e6-950c-b981c78f541a',
+    salary: 35700,
+    amount: 702500,    
+    profit: -750123,
+    isConfirmed: false
+  }
+]
+
+5) получение списка лидов, кому ПОДТВЕРДИЛИ кредит (select * from leads where is_confirmed = true) 
+GET /get-confirmed-leads
+
+[
+  {
+    fromPlayerId: 'd4146bea-95d5-414a-a01c-755dba3a4e97',
+    toPlayerId: 'e3965142-9b54-491a-9db7-f22364f266b3',
+    leadId: '35459969-6308-46e6-950c-b981c78f541a',
+    salary: 35700,
+    amount: 702500,    
+    profit: -750123,
+    isConfirmed: false
+  }
+]
+
+5) выдать кредит лиду (update leads set is_confirmed = true where lead_id=...)
+GET /confirm-lead?leadId=35459969-6308-46e6-950c-b981c78f541a
+
+//response
+  {
+    fromPlayerId: 'd4146bea-95d5-414a-a01c-755dba3a4e97',
+    toPlayerId: 'e3965142-9b54-491a-9db7-f22364f266b3',
+    leadId: '35459969-6308-46e6-950c-b981c78f541a',
+    salary: 35700,
+    amount: 702500,
+    profit: -750123,
+    isConfirmed: true
+  }
+
+  6) удалить все данные для обнуления игры (
+    delete from leads
+    delete from players
+  )
+ GET /clear-game
+
+
+
+
+
+
+
+
+
+
+
+ректор
+300 - 700
+0.9
+
+генеральный директор
+150 - 500
+0.8
+
+главврач
+200 - 300
+0.9
+
+сотрудник МВД
+30 - 70
+0.9
+
+
+
+
+
+
+архитектор
+70 - 250
+0.7
+
+программист
+100 - 250
+0.8
+
+
+
+военный
+40 - 60
+0.7
+
+предприниматель
+30 - 300
+0.6
+
+дизайнер
+40 - 100
+0.7
+
+маркетолог
+40 - 150
+0.6
+
+менеджер
+40 - 250
+0.5
+
+инженер
+35 - 70
+0.6
+
+врач
+25 - 90
+0.7
+
+преподаватель
+25 - 90
+0.6
+
+научный сотрудник
+15 - 40
+0.5
+
+торговый представитель
+25 - 70
+0.5
+
+юрист
+40 - 120
+0.6
+
+риэлтор
+40 - 120
+0.6
+
+бухгалтер
+40 - 80
+0.6
+
+копирайтер
+25 - 60
+0.5
+
+сварщик
+40 - 90
+0.5
+
+строитель
+30 - 70
+0.4
+
+медсестра
+11 - 30
+0.3
+
+охранник
+11 - 30
+0.3
+
+водитель
+30 - 70
+0.4
+
+кассир
+25 - 40
+0.4
+
+дворник
+7 - 11
+0.1
+
+пекарь
+11 - 30
+0.2
+
+безработный
+0 - 5
+0
+
+фрилансер
+10 - 90
+0.1
+
+студент
+0 - 2
+0

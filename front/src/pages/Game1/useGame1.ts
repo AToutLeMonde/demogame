@@ -1,10 +1,11 @@
-import { generateAvatar } from './../../utils/avatars';
-import React from 'react'
-import * as _ from 'lodash/fp'
-import { useAppActions, useAppStore } from 'src/store'
+import * as _ from 'lodash/fp';
+import React from 'react';
+import { createLeadApi } from 'src/api';
+import { useAppActions, useAppStore } from 'src/store';
 import { getRandom } from 'src/utils';
 import useSound from 'use-sound';
-import { createLeadApi } from 'src/api';
+
+import { generateAvatar } from './../../utils/avatars';
 
 
 
@@ -26,20 +27,22 @@ export const useGame1 = () => {
 
   const [playingMusic, setPlayingMusic] = React.useState(false);
 
-  
-  const [playTheme, {stop}] = useSound(
+
+  const [playTheme, { stop }] = useSound(
     '/sounds/theme.mp3',
-    { volume: 0.25,
+    {
+      volume: 0.01,
       onend: () => {
         setPlayingMusic(false)
-      } }
+      }
+    }
   );
 
-  
+
 
 
   React.useEffect(() => {
-    
+
 
     return () => {
       //stop();
@@ -51,7 +54,7 @@ export const useGame1 = () => {
   //const [avatars, setAvatars] = React.useState(buildAvatars())
   const timer = React.useRef(null);
 
-  
+
 
   React.useEffect(() => {
     const t = setTimeout(() => {
@@ -72,17 +75,19 @@ export const useGame1 = () => {
 
   const [playCatch] = useSound(
     '/sounds/catch.mp3',
-    { volume: 0.5,
-      interrupt: true }
+    {
+      volume: 0.5,
+      interrupt: true
+    }
   );
 
   const [nextPlayerIndex, setNextPlayerIndex] = React.useState(0)
 
-  const onClick = async (index:number) => {
+  const onClick = async (index: number) => {
 
     playCatch();
 
-    
+
 
     hideAvatar(index);
 
@@ -98,9 +103,9 @@ export const useGame1 = () => {
       if (nextPlayerIndex >= players.length) {
         toPlayerId = players[0].playerId;
         setNextPlayerIndex(1);
-      }else {
+      } else {
         toPlayerId = players[nextPlayerIndex].playerId;
-        setNextPlayerIndex(nextPlayerIndex+1);
+        setNextPlayerIndex(nextPlayerIndex + 1);
       }
 
       await createLeadApi({
@@ -111,7 +116,7 @@ export const useGame1 = () => {
         profit: avatar.profit,
         avatar: avatar.avatar,
         profession: avatar.profession,
-        isConfirmed: false
+        confirmed: false
       })
     }
     //console.log('players',players)

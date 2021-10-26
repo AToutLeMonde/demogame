@@ -1,6 +1,5 @@
 const express = require('express')
 const cors = require('cors')
-const bodyParser = require('body-parser')
 const {
 leads,
   players,
@@ -19,32 +18,32 @@ app.use(cors())
 app.use(express.json());
 
 app.post('/create-player', function (req, res, next) {
-  
+
   //console.log(req.body, req.query)
   res.json(createPlayer(req.body))
 })
 
-app.get('/get-players', function (req, res, next) {    
+app.get('/get-players', function (req, res, next) {
   res.json(getPlayers())
 })
 
-app.post('/create-lead', function (req, res, next) {    
+app.post('/create-lead', function (req, res, next) {
   res.json(createLead(req.body))
 })
 
-app.get('/get-not-confirmed-leads', function (req, res, next) {     
+app.get('/get-not-confirmed-leads', function (req, res, next) {
   res.json(getNotConfirmedLeads(req.query.playerId))
 })
 
-app.get('/get-confirmed-leads', function (req, res, next) {     
+app.get('/get-confirmed-leads', function (req, res, next) {
   res.json(getConfirmedLeads())
 })
 
-app.get('/confirm-lead', function (req, res, next) {     
+app.get('/confirm-lead', function (req, res, next) {
   res.json(confirmLead(req.query.leadId))
 })
 
-app.get('/clear-game', function (req, res, next) {     
+app.get('/clear-game', function (req, res, next) {
   clearGame();
   res.json()
 })

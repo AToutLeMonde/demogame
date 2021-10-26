@@ -1,10 +1,11 @@
-import { runDebounced } from './../../utils/debounced';
-import React from 'react'
-import * as _ from 'lodash/fp'
-import useSound from 'use-sound';
-import { useAppActions, useAppStore } from 'src/store';
+import * as _ from 'lodash/fp';
+import React from 'react';
 import { getNotConfirmedLeadsApi } from 'src/api';
+import { useAppActions, useAppStore } from 'src/store';
 import { getRandom, rectanglesIntersect, showBadLead, showGoodLead } from 'src/utils';
+import useSound from 'use-sound';
+
+import { runDebounced } from './../../utils/debounced';
 
 const xPositions = [
   20, 130, 240, 350, 460, 570, 680, 790, 900, 1010, 1120
@@ -66,9 +67,9 @@ export const useGame2 = () => {
   const [playTheme, { stop }] = useSound(
     '/sounds/theme.mp3',
     {
-      volume: 0.25,
+      volume: 0.01,
       onend: () => {
-        console.log('xxxx-stop')
+        //console.log('xxxx-stop')
         setPlayingMusic(false)
       }
     }
@@ -98,7 +99,7 @@ export const useGame2 = () => {
     })
 
     //console.log('nonConfirmedLeadIds', nonConfirmedLeadIds)
-    nonConfirmedLeadIds.forEach(id => {            
+    nonConfirmedLeadIds.forEach(id => {
       updateLeadPosition(generateLeadPosition(id, nonConfirmedLeadById[id].profit))
     })
 
@@ -133,7 +134,7 @@ export const useGame2 = () => {
   //console.log('playingMusic',playingMusic)
 
   const onMouseMove = (e) => {
-    const {leadPositions, nonConfirmedLeadById} = getState();
+    const { leadPositions, nonConfirmedLeadById } = getState();
 
     if (!playingMusic) {
       console.log('playingMusic', playingMusic)
@@ -143,7 +144,7 @@ export const useGame2 = () => {
 
     leadPositions.forEach(i => {
       const isIntersect = isPosIntersect(i, bagX)
-
+      console.log('isIntersect', isIntersect, i)
       if (isIntersect) {
         const lead = nonConfirmedLeadById[i.leadId];
 

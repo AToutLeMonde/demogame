@@ -8,11 +8,11 @@ export type Lead = {
   fromPlayerId: string,
   toPlayerId: string,
   avatar: string,
-  profession: string,  
+  profession: string,
   salary: number,
   amount: number,
   profit: number,
-  isConfirmed: boolean
+  confirmed: boolean
 }
 
 export type Player = {

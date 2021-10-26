@@ -1,10 +1,9 @@
-import React from 'react'
-import { Close } from '@fcc/icons'
-import { Button, Grid, Groups, P } from '@fcc/ui'
-import styled from 'styled-components'
-import { generateAvatar, parseAvatar } from 'src/utils'
-
-import { formatNumberString, convertNumberToString } from '@fcc/utils'
+import { Close } from '@fcc/icons';
+import { Button, Grid, Groups, P } from '@fcc/ui';
+import { convertNumberToString, formatNumberString } from '@fcc/utils';
+import React from 'react';
+import { generateAvatar, parseAvatar } from 'src/utils';
+import styled from 'styled-components';
 
 const Container = styled.div`
 width: 152px;
@@ -41,12 +40,12 @@ text-shadow: 2px 2px 2px #fff;
 
 `
 
-const rootUrl = '/img/game-assets/faces';
+const rootUrl = '/demogame/img/game-assets/faces';
 
 export const GameAvatar2 = (props) => {
 
   //const avatar = props.avatar;
-  
+
 
   let avatarImg = props.string ? parseAvatar(props.string) : generateAvatar();
 
@@ -60,11 +59,11 @@ export const GameAvatar2 = (props) => {
 
   return (
     <>
-        
+
       <Container
       style={{left: props.x, top: props.y }}
        onClick={handleClick}>
-         
+
         <Img alt="" src={`${rootUrl}/face.png`} />
         <Img alt="" src={`${rootUrl}/${avatarImg.eyebrows}`} />
         <Img alt="" src={`${rootUrl}/${avatarImg.eyes}`} />
@@ -76,7 +75,7 @@ export const GameAvatar2 = (props) => {
           }}>
             {props.profession}<br/>
            кредит: {convertNumberToString(props.amount)}₽<br/>
-           Зп: {convertNumberToString(props.salary)}₽           
+           Зп: {convertNumberToString(props.salary)}₽
         </Caption>
     </>
   )

@@ -1,8 +1,8 @@
-import React from 'react'
-import { Close } from '@fcc/icons'
-import { Button, Grid, Groups, P } from '@fcc/ui'
-import styled from 'styled-components'
-import { generateAvatar, parseAvatar } from 'src/utils'
+import { Close } from '@fcc/icons';
+import { Button, Grid, Groups, P } from '@fcc/ui';
+import React from 'react';
+import { generateAvatar, parseAvatar } from 'src/utils';
+import styled from 'styled-components';
 
 const Container = styled.div`
 width: 152px;
@@ -40,12 +40,12 @@ font-weight: 700;
 text-shadow: 2px 2px 2px #fff;
 `
 
-const rootUrl = '/img/game-assets/faces';
+const rootUrl = '/demogame/img/game-assets/faces';
 
 export const GameAvatar = (props) => {
 
   if (!props.x || !props.y) {
-    console.error('err',props)
+    console.error('err', props)
   }
 
   //const avatar = props.avatar;
@@ -71,12 +71,14 @@ export const GameAvatar = (props) => {
 
   return (
     <>
-        
+
       <Container
-      style={{left: props.x || 'unset', top: props.y || 'unset',
-         display: isVisible ? 'block' : 'none'}}
-       onMouseDown={handleClick}>
-         
+        style={{
+          left: props.x || 'unset', top: props.y || 'unset',
+          display: isVisible ? 'block' : 'none'
+        }}
+        onMouseDown={handleClick}>
+
         <Img alt="" src={`${rootUrl}/face.png`} />
         <Img alt="" src={`${rootUrl}/${avatarImg.eyebrows}`} />
         <Img alt="" src={`${rootUrl}/${avatarImg.eyes}`} />
@@ -84,11 +86,12 @@ export const GameAvatar = (props) => {
         <Img alt="" src={`${rootUrl}/${avatarImg.mouth}`} />
       </Container>
       <Caption
-        style={{left: props.x-20, top: props.y+145,
+        style={{
+          left: props.x - 20, top: props.y + 145,
           display: isVisible ? 'block' : 'none'
-          }}>
-           {props.profession}
-        </Caption>
+        }}>
+        {props.profession}
+      </Caption>
     </>
   )
 }

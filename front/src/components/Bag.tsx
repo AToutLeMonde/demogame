@@ -1,8 +1,8 @@
-import React from 'react'
-import { Close } from '@fcc/icons'
-import { Button, Grid, Groups, P } from '@fcc/ui'
-import styled from 'styled-components'
-import { generateAvatar, parseAvatar } from 'src/utils'
+import { Close } from '@fcc/icons';
+import { Button, Grid, Groups, P } from '@fcc/ui';
+import React from 'react';
+import { generateAvatar, parseAvatar } from 'src/utils';
+import styled from 'styled-components';
 
 const Container = styled.div`
 width: 152px;
@@ -26,7 +26,7 @@ user-select: none;
 `
 
 
-const rootUrl = '/img/game-assets/';
+const rootUrl = '/demogame/img/game-assets/';
 
 export const Bag = (props) => {
 
@@ -34,15 +34,15 @@ export const Bag = (props) => {
 
   return (
     <>
-        
+
       <Container
-      style={{left: props.x}}
-         >
-         
+        style={{ left: props.x }}
+      >
+
         <Img alt="" src={`${rootUrl}/bag.png`} />
-        
-        
-      </Container>      
+
+
+      </Container>
     </>
   )
 }
